@@ -1,0 +1,6 @@
+# ninja log v5
+1	432	7273116348646361	CMakeFiles/geneticTSP.dir/main.cpp.obj	511d55a3bcc45e6a
+439	575	7273116349965991	geneticTSP.exe	e8a3c0e3f75e5d8e
+4	498	7273117074685554	build.ninja	84e46adc9bf32d41
+4	396	7273117080517218	CMakeFiles/geneticTSP.dir/main.cpp.obj	bb8323ec5def3ccb
+397	851	7273117084975876	geneticTSP.exe	d91dadfba00fc9dd
