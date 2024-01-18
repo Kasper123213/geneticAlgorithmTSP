@@ -1,3 +1,0 @@
-C:/Users/radom/OneDrive/Pulpit/PEA/geneticTSP/cmake-build-debug/CMakeFiles/geneticTSP.dir
-C:/Users/radom/OneDrive/Pulpit/PEA/geneticTSP/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/radom/OneDrive/Pulpit/PEA/geneticTSP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
