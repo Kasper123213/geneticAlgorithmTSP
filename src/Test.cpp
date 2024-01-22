@@ -11,18 +11,16 @@ Test::Test() {
     //zmienna przechowująca decyzje użytkownika o uruchomieniu testu automatycznegp
     char choice;
 
-    while (true) {
-        cout << "Czy uruchomic testy automatyczne do sprawozdania? T/N/exit\n>>";
+    choice = 'N';
+
+    while (choice == 'n' or choice == 'N') {
+        startTest();
+
+        cout << "Czy zamknąć program T/N" <<endl;
+        cout<<">>";
         cin >> choice;
         cout<<endl;
 
-        if (choice == 't' or choice == 'T') {
-            runAutoTests();
-        }else if(choice == 'n' or choice == 'N'){
-            startTest();
-        }else{
-            return;
-        }
 
     }
 }
@@ -49,6 +47,19 @@ void Test::showData(){
 //uruchomienie testów algorytmu
 void Test::startTest(){
     while (true){
+        //todo usunąć
+        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\tsp_6_1.txt)");
+//        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\br17.atsp)");
+        maxTime = 5;
+        populationSize = 3;
+        mutationPoss = 0.1;
+        crossingPoss = 0.3;
+        mutationMethod = 1;
+        crossingPoss = 1;
+        startAlgorithm();
+        return;
+        //todo
+
         showData();
 
         cout << "Co chcesz zrobić?\n"
@@ -56,9 +67,10 @@ void Test::startTest(){
                 "2. Wprowadzenie kryterium stopu\n"
                 "3. Ustawienie wielkości populacji początkowej\n"
                 "4. Ustawienie współczynnika mutacji\n"
-                "5. Ustawienia współczynnika krzyżowania (opcjonalnie)\n"
+                "5. Ustawienia współczynnika krzyżowania\n"
                 "6. Wybór metody metody mutacji (opcjonalnie)\n"
-                "7. Uruchomianie algorytmu dla wczytanych danych i ustawionych parametrów i wyświetlenie wyników\n"
+                "7. Wybór metody metody krzyżowania (opcjonalnie)\n"
+                "8. Uruchomianie algorytmu dla wczytanych danych i ustawionych parametrów i wyświetlenie wyników\n"
                 "0. Wyjście\n"
                 <<endl;
         //wybór czynności przez użytkownika
@@ -102,10 +114,19 @@ void Test::startTest(){
                 cin>>crossingPoss;
                 break;
             case 6:
-                cout<<"Wybierz metodę mmutacji\n>>"; //todo wypisywanie metod mutacji
+                cout<<"Wybierz metodę mutacji\n>>"; //todo wypisywanie metod mutacji
                 cin>>mutationMethod;
                 break;
             case 7:
+                cout<<"Wybierz metodę krzyżowania\n>>"; //todo wypisywanie metod krzyżowania
+                cin>>crossingMethod;
+                break;
+            case 8:
+                if(maxTime<=0)cout<<"Nie podano kryterium stopu"<<endl;
+                if(populationSize<=0)cout<<"Nie podano wielkości populacji"<<endl;
+                if(mutationMethod<=0)cout<<"Nie podano kryterium stopu"<<endl; //todo robic cos w stulu jesli to nie jest rowne 1,2 lub 3 to...
+                if(crossingMethod<=0)cout<<"Nie podano kryterium stopu"<<endl;//todo tu też
+
                 startAlgorithm();
                 //todo wypisywanie danych
                 break;
@@ -140,7 +161,8 @@ void  Test::deleteMatrix(){
 
 //rozpoczęcie algorytmu
 void Test::startAlgorithm() {
-    GeneticAlg* geneticAlg = new GeneticAlg();
+    GeneticAlg* geneticAlg = new GeneticAlg(matrix, matrixSize, maxTime, populationSize, mutationPoss,
+                                            crossingPoss,mutationMethod,crossingMethod);
 
     geneticAlg->start();
 

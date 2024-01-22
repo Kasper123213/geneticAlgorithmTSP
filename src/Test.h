@@ -1,5 +1,5 @@
-#ifndef PEA1_TEST_H
-#define PEA1_TEST_H
+#ifndef GENETICTSP_TEST_H
+#define GENETICTSP_TEST_H
 
 #include<iostream>
 #include <vector>
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif //PEA1_TEST_H
+#endif //GENETICTSP_TEST_H
