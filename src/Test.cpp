@@ -48,10 +48,10 @@ void Test::showData(){
 void Test::startTest(){
     while (true){
         //todo usunąć
-        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\tsp_6_1.txt)");
-//        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\br17.atsp)");
+//        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\tsp_6_1.txt)");
+        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\br17.atsp)");
         maxTime = 5;
-        populationSize = 3;
+        populationSize = 5;
         mutationPoss = 0.1;
         crossingPoss = 0.3;
         mutationMethod = 1;

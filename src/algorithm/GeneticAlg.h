@@ -29,12 +29,13 @@ public:
     Chromosome bestSolution;
 
     void start();
-    void generatePopulation(int size);
+    vector<Chromosome> generatePopulation(int size);
     Chromosome findBestChromosome(vector<Chromosome> chromosomes);
-    void doTournament();
-    void crossing(Chromosome& chromosome);
+    vector<Chromosome> doTournament(vector<Chromosome> population);
+    pair<Chromosome, Chromosome> crossing(Chromosome& parent1, Chromosome& parent2);
     void mutation(Chromosome& chromosome);
     void insertMutation(Chromosome* chromosome);
+    void exchangeMutation(Chromosome* chromosome);
 
     GeneticAlg(int **matrix, int matrixSize, long maxTime, int populationSize, double mutationPoss,
                double crossingPoss, int mutationMethod, int crossingMethod);
@@ -42,6 +43,14 @@ public:
     ~GeneticAlg();
 
     void pokazPopulacje();
+
+    pair<Chromosome, Chromosome> pmxCrossover(Chromosome &chromosome, Chromosome &chromosome1);
+
+    vector<Chromosome> succession(vector<Chromosome> vector1);
+
+    void ratePopulation();
+
+    bool compareChromosomes(const Chromosome &a, const Chromosome &b);
 };
 
 
