@@ -6,7 +6,233 @@
 //#include "algorithms/Ts.h"
 
 //konstruktor klasy
+
+void Test::testyDoSprawozdania(string nazwa) {
+    mutationPoss = 0.01;
+    crossingPoss = 0.8;
+    cout<<"odpalam "<<nazwa<<", czas "<<maxTime/1000/60<<" min, populacja "<<populationSize<<" czestotliwosc mutacji "<<endl
+    <<mutationPoss<<" czestotliwosc krzyzowania "<<crossingPoss<<" typ mutacji "<<mutationMethod<<endl;
+    ofstream excelFile(nazwa);
+    GeneticAlg* geneticAlg = new GeneticAlg(matrix, matrixSize, maxTime, populationSize, mutationPoss,
+                                            crossingPoss,mutationMethod,crossingMethod);
+    geneticAlg->start();
+    for(int x:geneticAlg->daneDoWykresowBest){
+        excelFile<<x<<";";
+    }
+    excelFile<<endl;
+    for(int x:geneticAlg->daneDoWykresowCzas){
+        excelFile<<x<<";";
+    }
+    excelFile<<endl;
+    delete geneticAlg;
+    excelFile.close();
+}
+
+
+
+
+
 Test::Test() {
+
+    //todo usunąć
+
+//########################################################################################################################################
+    readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\ftv47.atsp)");
+    //####################################################################
+    maxTime = 2*60*1000;
+    populationSize = 5;
+    mutationMethod = 1;
+    string nazwa = "GEN_ftv47_pop5_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 2*60*1000;
+    populationSize = 5;
+    mutationMethod = 2;
+    nazwa = "GEN_ftv47_pop5_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 2*60*1000;
+    populationSize = 10;
+    mutationMethod = 1;
+    nazwa = "GEN_ftv47_pop10_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 2*60*1000;
+    populationSize = 10;
+    mutationMethod = 2;
+    nazwa = "GEN_ftv47_pop10_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 2*60*1000;
+    populationSize = 15;
+    mutationMethod = 1;
+    nazwa = "GEN_ftv47_pop15_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 2*60*1000;
+    populationSize = 15;
+    mutationMethod = 2;
+    nazwa = "GEN_ftv47_pop15_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+
+
+
+
+
+
+
+
+//########################################################################################################################################
+    readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\ftv170.atsp)");
+    //####################################################################
+    maxTime = 4*60*1000;
+    populationSize = 15;
+    mutationMethod = 1;
+    nazwa = "GEN_ftv170_pop15_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 4*60*1000;
+    populationSize = 5;
+    mutationMethod = 2;
+    nazwa = "GEN_ftv170_pop5_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 4*60*1000;
+    populationSize = 40;
+    mutationMethod = 1;
+    nazwa = "GEN_ftv170_pop40_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 4*60*1000;
+    populationSize = 40;
+    mutationMethod = 2;
+    nazwa = "GEN_ftv170_pop40_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 4*60*1000;
+    populationSize = 60;
+    mutationMethod = 1;
+    nazwa = "GEN_ftv170_pop60_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 4*60*1000;
+    populationSize = 60;
+    mutationMethod = 2;
+    nazwa = "GEN_ftv170_pop60_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+
+
+
+
+
+
+
+
+
+
+//########################################################################################################################################
+    readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\rbg403.atsp)");
+    //####################################################################
+    maxTime = 6*60*1000;
+    populationSize = 50;
+    mutationMethod = 1;
+    nazwa = "GEN_rbg408_pop50_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 6*60*1000;
+    populationSize = 50;
+    mutationMethod = 2;
+    nazwa = "GEN_rbg408_pop50_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 6*60*1000;
+    populationSize = 90;
+    mutationMethod = 1;
+    nazwa = "GEN_rbg408_pop90_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 6*60*1000;
+    populationSize = 90;
+    mutationMethod = 2;
+    nazwa = "GEN_rbg408_pop90_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 6*60*1000;
+    populationSize = 150;
+    mutationMethod = 1;
+    nazwa = "GEN_rbg408_pop150_mut1.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+    //####################################################################
+    maxTime = 6*60*1000;
+    populationSize = 150;
+    mutationMethod = 2;
+    nazwa = "GEN_rbg408_pop150_mut2.csv";
+    testyDoSprawozdania(nazwa);
+    //####################################################################
+
+
+
+
+
+
+    return;
+    //todo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //zmienna przechowująca decyzje użytkownika o uruchomieniu testu automatycznegp
     char choice;
@@ -47,19 +273,6 @@ void Test::showData(){
 //uruchomienie testów algorytmu
 void Test::startTest(){
     while (true){
-        //todo usunąć
-//        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\tsp_6_1.txt)");
-        readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\br17.atsp)");
-        maxTime = 5;
-        populationSize = 5;
-        mutationPoss = 0.1;
-        crossingPoss = 0.3;
-        mutationMethod = 1;
-        crossingPoss = 1;
-        startAlgorithm();
-        return;
-        //todo
-
         showData();
 
         cout << "Co chcesz zrobić?\n"
