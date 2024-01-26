@@ -19,13 +19,6 @@ int main() {
     //zwolnienie pamięci po obiekcie test i wywołanie jego destruktora
     delete test;
 
-//    vector<int> x;
-//    x.push_back(1);
-//    x.push_back(2);
-//    x.push_back(3);
-//
-//    auto d = std::find(x.begin(), x.end(),2);
-//    cout<<distance(x.begin() , d);
 }
 
 

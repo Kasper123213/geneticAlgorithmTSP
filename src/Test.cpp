@@ -2,237 +2,9 @@
 #include <sstream>
 #include "Test.h"
 #include "algorithm/GeneticAlg.h"
-//#include "algorithms/Sa.h"
-//#include "algorithms/Ts.h"
-
-//konstruktor klasy
-
-void Test::testyDoSprawozdania(string nazwa) {
-    mutationPoss = 0.01;
-    crossingPoss = 0.8;
-    cout<<"odpalam "<<nazwa<<", czas "<<maxTime/1000/60<<" min, populacja "<<populationSize<<" czestotliwosc mutacji "<<endl
-    <<mutationPoss<<" czestotliwosc krzyzowania "<<crossingPoss<<" typ mutacji "<<mutationMethod<<endl;
-    ofstream excelFile(nazwa);
-    GeneticAlg* geneticAlg = new GeneticAlg(matrix, matrixSize, maxTime, populationSize, mutationPoss,
-                                            crossingPoss,mutationMethod,crossingMethod);
-    geneticAlg->start();
-    for(int x:geneticAlg->daneDoWykresowBest){
-        excelFile<<x<<";";
-    }
-    excelFile<<endl;
-    for(int x:geneticAlg->daneDoWykresowCzas){
-        excelFile<<x<<";";
-    }
-    excelFile<<endl;
-    delete geneticAlg;
-    excelFile.close();
-}
-
-
-
 
 
 Test::Test() {
-
-    //todo usunąć
-
-//########################################################################################################################################
-    readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\ftv47.atsp)");
-    //####################################################################
-    maxTime = 2*60*1000;
-    populationSize = 5;
-    mutationMethod = 1;
-    string nazwa = "GEN_ftv47_pop5_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 2*60*1000;
-    populationSize = 5;
-    mutationMethod = 2;
-    nazwa = "GEN_ftv47_pop5_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 2*60*1000;
-    populationSize = 10;
-    mutationMethod = 1;
-    nazwa = "GEN_ftv47_pop10_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 2*60*1000;
-    populationSize = 10;
-    mutationMethod = 2;
-    nazwa = "GEN_ftv47_pop10_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 2*60*1000;
-    populationSize = 15;
-    mutationMethod = 1;
-    nazwa = "GEN_ftv47_pop15_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 2*60*1000;
-    populationSize = 15;
-    mutationMethod = 2;
-    nazwa = "GEN_ftv47_pop15_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-
-
-
-
-
-
-
-
-//########################################################################################################################################
-    readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\ftv170.atsp)");
-    //####################################################################
-    maxTime = 4*60*1000;
-    populationSize = 15;
-    mutationMethod = 1;
-    nazwa = "GEN_ftv170_pop15_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 4*60*1000;
-    populationSize = 5;
-    mutationMethod = 2;
-    nazwa = "GEN_ftv170_pop5_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 4*60*1000;
-    populationSize = 40;
-    mutationMethod = 1;
-    nazwa = "GEN_ftv170_pop40_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 4*60*1000;
-    populationSize = 40;
-    mutationMethod = 2;
-    nazwa = "GEN_ftv170_pop40_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 4*60*1000;
-    populationSize = 60;
-    mutationMethod = 1;
-    nazwa = "GEN_ftv170_pop60_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 4*60*1000;
-    populationSize = 60;
-    mutationMethod = 2;
-    nazwa = "GEN_ftv170_pop60_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-
-
-
-
-
-
-
-
-
-
-//########################################################################################################################################
-    readMatrix(R"(C:\Users\radom\OneDrive\Pulpit\PEA\geneticTSP\z2_z3\ATSP\rbg403.atsp)");
-    //####################################################################
-    maxTime = 6*60*1000;
-    populationSize = 50;
-    mutationMethod = 1;
-    nazwa = "GEN_rbg408_pop50_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 6*60*1000;
-    populationSize = 50;
-    mutationMethod = 2;
-    nazwa = "GEN_rbg408_pop50_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 6*60*1000;
-    populationSize = 90;
-    mutationMethod = 1;
-    nazwa = "GEN_rbg408_pop90_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 6*60*1000;
-    populationSize = 90;
-    mutationMethod = 2;
-    nazwa = "GEN_rbg408_pop90_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 6*60*1000;
-    populationSize = 150;
-    mutationMethod = 1;
-    nazwa = "GEN_rbg408_pop150_mut1.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-    //####################################################################
-    maxTime = 6*60*1000;
-    populationSize = 150;
-    mutationMethod = 2;
-    nazwa = "GEN_rbg408_pop150_mut2.csv";
-    testyDoSprawozdania(nazwa);
-    //####################################################################
-
-
-
-
-
-
-    return;
-    //todo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //zmienna przechowująca decyzje użytkownika o uruchomieniu testu automatycznegp
     char choice;
@@ -261,10 +33,15 @@ void Test::showData(){
     if(fileName!="")cout<<"Nazwa Pliku: "<<fileName<<endl;
     if(populationSize!=0)cout<<"Wielkość populacji początkowej: "<<populationSize<<endl;
     if(mutationPoss!=0)cout<<"Prawdopodobieństwo mutacji: "<<mutationPoss<<endl;
-    //todo dodac metody mutacji
+
+    cout<<"Typ mutacji: ";
+    if(mutationMethod==1)cout<<"Insert Mutation"<<endl;
+    else cout<<"Exchange Mutation"<<endl;
+
     if(crossingPoss!=0)cout<<"Prawdopodobieństwo krzyżowania: "<<crossingPoss<<endl;
-    //todo dodac metody krzyzowania
-    cout<<"Kryterium stopu: "<<maxTime<<endl;
+
+    cout<<"Metoda krzyżowania: PMX"<<endl;
+    cout<<"Kryterium stopu: "<<maxTime/1000<<"s"<<endl;
 
 
     cout<<"_____________________________________________________________________________________"<<endl;
@@ -305,7 +82,6 @@ void Test::startTest(){
                     if (slashPoss == string::npos)slashPoss = path.rfind('\\');
                     fileName = path.substr(slashPoss + 1);
                     showMatrix();
-                    showData();
                 }else{
                     cout<<"Nie można wczytać ścieżki"<<endl;
                 }
@@ -313,6 +89,7 @@ void Test::startTest(){
             case 2:
                 cout<<"Podaj kryterium stopu (czas w sekundach):\n>>";
                 cin>>maxTime;
+                maxTime*=1000;
                 break;
             case 3:
                 cout<<"Podaj wielkość populacji początkowej:\n>>";
@@ -327,21 +104,24 @@ void Test::startTest(){
                 cin>>crossingPoss;
                 break;
             case 6:
-                cout<<"Wybierz metodę mutacji\n>>"; //todo wypisywanie metod mutacji
+                cout<<"Wybierz metodę mutacji"<<endl;
+                cout<<"\t1. Insert Mutation"<<endl
+                <<"\t2. Exchange Mutation\n>>";
                 cin>>mutationMethod;
                 break;
             case 7:
-                cout<<"Wybierz metodę krzyżowania\n>>"; //todo wypisywanie metod krzyżowania
-                cin>>crossingMethod;
+                cout<<"Niestety, została zaimplementowana wyłącznie jedna metoda krzyżowania"<<endl;
                 break;
             case 8:
-                if(maxTime<=0)cout<<"Nie podano kryterium stopu"<<endl;
-                if(populationSize<=0)cout<<"Nie podano wielkości populacji"<<endl;
-                if(mutationMethod<=0)cout<<"Nie podano kryterium stopu"<<endl; //todo robic cos w stulu jesli to nie jest rowne 1,2 lub 3 to...
-                if(crossingMethod<=0)cout<<"Nie podano kryterium stopu"<<endl;//todo tu też
-
-                startAlgorithm();
-                //todo wypisywanie danych
+                if(matrixSize<=0)cout<<"Nie ustawiono grafu"<<endl;
+                else if(maxTime<=0)cout<<"Nie podano kryterium stopu"<<endl;
+                else if(populationSize<=0)cout<<"Nie podano wielkości populacji"<<endl;
+                else if(mutationMethod<=0)cout<<"Nie podano kryterium stopu"<<endl; //todo robic cos w stulu jesli to nie jest rowne 1,2 lub 3 to...
+                else if(crossingMethod<=0)cout<<"Nie podano kryterium stopu"<<endl;//todo tu też
+                else {
+                    startAlgorithm();
+                    //todo wypisywanie danych
+                }
                 break;
             default:
                 return;
@@ -355,8 +135,9 @@ void Test::showMatrix() {
         for(int j = 0;j<matrixSize;j++){
             cout<<matrix[i][j]<<"\t";
         }
-        cout<<"__________________________________________"<<endl;
+        cout<<endl;
     }
+    cout<<"__________________________________________"<<endl;
     cout<<endl<<endl;
 }
 
@@ -378,6 +159,15 @@ void Test::startAlgorithm() {
                                             crossingPoss,mutationMethod,crossingMethod);
 
     geneticAlg->start();
+
+    cout<<"_____________________ROZWIĄZANIE_____________________"<<endl;
+    cout<<"Najlepsze rozwiązanie: "<<endl;
+    for(auto i:geneticAlg->bestSolution.path){
+        cout<<i<<", ";
+    }
+    cout<<endl;
+    cout<<"Jego długość: "<<geneticAlg->bestSolution.cost<<endl;
+    cout<<"____________________________________________________"<<endl<<endl;
 
     delete geneticAlg;
 }
@@ -444,36 +234,4 @@ bool Test::readMatrix(string path){
     }
     file.close();
     return true;
-}
-
-
-
-void Test::runAutoTests(){
-//    readMatrix("C:\\Users\\radom\\OneDrive\\Pulpit\\PEA_Z2\\z2_z3\\ATSP\\ftv55.atsp");
-//    cout<<"odpalam ftv55, cooling type = 1"<<endl;
-//    for(int i=0;i<10;i++) {
-//        cout<<i<<endl;
-//
-//        string nazwa = "SA_ftv55_1_" + to_string(i) + ".csv";
-//        ofstream excelFile(nazwa);
-//
-//        Sa* simAnneling = new Sa(matrix, matrixSize, 0.9989, 2*60, 1);
-//        simAnneling->start();
-//
-//        for(int x:simAnneling->wykresBesty){
-//            excelFile<<x<<";";
-//        }
-//        excelFile<<endl;
-//        for(int x:simAnneling->wykresCzasy){
-//            excelFile<<x<<";";
-//        }
-//        excelFile<<endl;
-//        for(int x:simAnneling->bestPath){
-//            excelFile<<x<<";";
-//        }
-//
-//        excelFile.close();
-//
-//        delete simAnneling;
-//    }
 }

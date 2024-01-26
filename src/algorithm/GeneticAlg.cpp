@@ -31,23 +31,32 @@ void GeneticAlg::start(){
     population = generatePopulation(populationSize);
     //przyjmujemy pierwszego osobnika za najlepszego. potem zostanie to zweryfkowane i zapewne zmienione
     bestSolution = population[0];
+    bestSolution.calcCost(matrix, matrixSize);
+    daneDoWykresowCzas.push_back(time->getTime());
+    daneDoWykresowBest.push_back(bestSolution.cost);
 
     //Pętla główna programu
     do{
         //ocena populacji
         ratePopulation();
 
-        pokazPopulacje();// todo
+
         //znajdowanie najlepszego chromosomu i sprawdzenie czy jest najlepszym rozwiązaniem
         bestInIteration = findBestChromosome(population);
 
-        //sukcesja
-        population = succession(population);
-        pokazPopulacje();// todo
-        return;
         if(bestInIteration.cost<bestSolution.cost){
             bestSolution = bestInIteration;
+            daneDoWykresowCzas.push_back(time->getTime());
+            daneDoWykresowBest.push_back(bestSolution.cost);
+//            cout<<bestSolution.cost<<" Time: "<<time->getTime()<<endl;
         }
+
+
+
+        //sukcesja
+        population = succession(population);
+//        pokazPopulacje();
+
         //turniej
         parents = doTournament(population);
 
@@ -71,7 +80,7 @@ void GeneticAlg::start(){
             }
         }
 
-    }while(true);//time->getTime()<=maxTime);
+    }while(time->getTime()<=maxTime);
 
     delete time;
 }
@@ -109,9 +118,10 @@ Chromosome GeneticAlg::findBestChromosome(vector<Chromosome> chromosomes){
     return best;
 }
 
-//metoda incjuje turniej
+//metoda turniejowa
 vector<Chromosome> GeneticAlg::doTournament(vector<Chromosome> population){
-    int tournamentSize = 3;//int(matrixSize * 0.05); //todo do ustalenia
+    int tournamentSize = int(matrixSize * 0.08);
+    if(tournamentSize<2)tournamentSize=2;
     int winnersSize = population.size();
     int chromosomeIndex;
 
@@ -142,19 +152,6 @@ vector<Chromosome> GeneticAlg::doTournament(vector<Chromosome> population){
 GeneticAlg::~GeneticAlg(){
 }
 
-//todo usunąć
-void GeneticAlg::pokazPopulacje() {
-    //todo usunąć
-    cout<<"Populacja:"<<endl;
-    for(auto ch:population){
-        for(auto i:ch.path){
-            cout<<i<<", ";
-        }
-        cout<<" Koszt:"<<ch.cost<<endl;
-    }
-    cout<<endl<<endl;
-    //todo usunąć
-}
 
 
 //wybór typu krzyżowania
@@ -181,8 +178,8 @@ void GeneticAlg::insertMutation(Chromosome* chromosome) {
     int index1;
     int index2;
     //losowanie punkców do mutacji
+    index1 = uniform_int_distribution<int>(1, chromosome->path.size() - 2)(generator);
     do {
-        index1 = uniform_int_distribution<int>(1, chromosome->path.size() - 2)(generator);
         index2 = uniform_int_distribution<int>(1, chromosome->path.size() - 2)(generator);
     }while(index1 == index2);
 
@@ -197,13 +194,14 @@ void GeneticAlg::insertMutation(Chromosome* chromosome) {
 }
 
 
+
 //mutacja typu exchange
 void GeneticAlg::exchangeMutation(Chromosome* chromosome) {
     int index1;
     int index2;
 
+    index1 = uniform_int_distribution<int>(1, chromosome->path.size() - 2)(generator);
     do {
-        index1 = uniform_int_distribution<int>(1, chromosome->path.size() - 2)(generator);
         index2 = uniform_int_distribution<int>(1, chromosome->path.size() - 2)(generator);
     }while(index1 == index2);
 
@@ -273,47 +271,20 @@ pair<Chromosome, Chromosome> GeneticAlg::pmxCrossover(Chromosome &parent1, Chrom
     child1.path.push_back(0);
     child2.path.push_back(0);
 
-//    cout<<endl<<endl<<endl;
-//    cout<<"Indeksy "<<index1<<", "<<index2<<endl;
-//    cout<<"Rodzic1: ";
-//    for(auto i:parent1.path){
-//        cout<<i<<", ";
-//    }cout<<endl;
-//    cout<<"Rodzic2: ";
-//    for(auto i:parent2.path){
-//        cout<<i<<", ";
-//    }cout<<endl;
-//    cout<<"dzieck1: ";
-//    for(auto i:child1.path){
-//        cout<<i<<", ";
-//    }cout<<endl;
-//    cout<<"dzieck2: ";
-//    for(auto i:child2.path){
-//        cout<<i<<", ";
-//    }cout<<endl;
 
     return make_pair(child1, child2);
 }
 
-vector<Chromosome> GeneticAlg::succession(vector<Chromosome> population) {
-    vector<Chromosome> newPopulation = population;
-//    int index1;
-//    int index2;
-//    while(newPopulation.size()<populationSize){
-//        index1 = uniform_int_distribution<int>(0, populationSize-1)(generator);
-//        index2 = uniform_int_distribution<int>(0, populationSize-1)(generator);
-//
-//        if(population[index1].cost<population[index2].cost){
-//            newPopulation.push_back(population[index1]);
-//        }else{
-//            newPopulation.push_back(population[index2]);
-//        }
-//    }
+vector<Chromosome> GeneticAlg::succession(vector<Chromosome> population) {//sukcesja elitarna
+    vector<Chromosome> newPopulation;
 
-    std::sort(newPopulation.begin(), newPopulation.end(),
+    //sortowanie wektora
+    std::sort(population.begin(), population.end(),
               [](const Chromosome& a, const Chromosome& b) {
                   return a.cost < b.cost;
               });
+
+    newPopulation.assign(population.begin(), population.begin() + populationSize);
 
     return newPopulation;
 }
@@ -323,9 +294,4 @@ void GeneticAlg::ratePopulation() {
     for(Chromosome & chromosome : population){
         chromosome.calcCost(matrix, matrixSize);
     }
-}
-
-
-bool GeneticAlg::compareChromosomes(const Chromosome &a, const Chromosome &b) {
-    return a.cost < b.cost;
 }

@@ -15,5 +15,5 @@ void Time::stop() {
 //zapisywana jest dokładniejsza wersja; w nanosekundach
 long Time::getTime() {
     stop();
-    return duration_cast<seconds>(stopTime - startTime).count();
+    return duration_cast<milliseconds>(stopTime - startTime).count();
 }

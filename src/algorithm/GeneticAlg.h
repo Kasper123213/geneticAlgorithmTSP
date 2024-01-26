@@ -28,6 +28,10 @@ public:
     Chromosome bestInIteration;
     Chromosome bestSolution;
 
+    //zmienne do sprawozdania
+    vector<long> daneDoWykresowCzas;
+    vector<int> daneDoWykresowBest;
+
     void start();
     vector<Chromosome> generatePopulation(int size);
     Chromosome findBestChromosome(vector<Chromosome> chromosomes);
@@ -37,20 +41,17 @@ public:
     void insertMutation(Chromosome* chromosome);
     void exchangeMutation(Chromosome* chromosome);
 
-    GeneticAlg(int **matrix, int matrixSize, long maxTime, int populationSize, double mutationPoss,
-               double crossingPoss, int mutationMethod, int crossingMethod);
-
-    ~GeneticAlg();
-
-    void pokazPopulacje();
-
     pair<Chromosome, Chromosome> pmxCrossover(Chromosome &chromosome, Chromosome &chromosome1);
 
     vector<Chromosome> succession(vector<Chromosome> vector1);
 
     void ratePopulation();
 
-    bool compareChromosomes(const Chromosome &a, const Chromosome &b);
+
+    GeneticAlg(int **matrix, int matrixSize, long maxTime, int populationSize, double mutationPoss,
+               double crossingPoss, int mutationMethod, int crossingMethod);
+
+    ~GeneticAlg();
 };
 
 

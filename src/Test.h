@@ -27,11 +27,11 @@ public:
     void deleteMatrix();
     void startAlgorithm();
     bool readMatrix(string path);
-    void runAutoTests();
     void showMatrix();
 
     Test();
     ~Test();
+
 
 };
 
